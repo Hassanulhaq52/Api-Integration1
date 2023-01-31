@@ -45,7 +45,8 @@ class ApiServices {
       debugPrint(response.body);
 
       if (response.statusCode == 200) {
-        List<CommentsModel> commentsInfo = body.map((e) => CommentsModel.fromJson(e)).toList();
+        List<CommentsModel> commentsInfo =
+            body.map((e) => CommentsModel.fromJson(e)).toList();
         return commentsInfo;
       } else {
         debugPrint('ERROR: ${response.statusCode}');

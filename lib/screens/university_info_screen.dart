@@ -33,7 +33,7 @@ class _UniversityInfoScreenState extends State<UniversityInfoScreen> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 2),
+                            horizontal: 10, vertical: 2,),
                         child: Card(
                           child: ListTile(
                             contentPadding: const EdgeInsets.all(8),
@@ -56,7 +56,7 @@ class _UniversityInfoScreenState extends State<UniversityInfoScreen> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20.0,
+                                  height: 5.0,
                                 ),
                                 Text(
                                   'Country: ${universityData[index].country}',
@@ -69,7 +69,7 @@ class _UniversityInfoScreenState extends State<UniversityInfoScreen> {
                                   height: 20.0,
                                 ),
                                 Text(
-                                  'Web Pages: ${universityData[index].webPages[0]}',
+                                  'Web Page: ${universityData[index].webPages[0]}',
                                   style: const TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.bold,
