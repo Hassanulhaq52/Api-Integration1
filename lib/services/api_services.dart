@@ -30,9 +30,10 @@ class ApiServices {
     }
   }
 
-  static const baseUrlComments = 'https://jsonplaceholder.typicode.com/comments';
+  static const baseUrlComments =
+      'https://jsonplaceholder.typicode.com/comments';
 
-  Future<CommentsModel?> getCommentsData() async {
+  Future<List<CommentsModel>?> getCommentsData() async {
     try {
       Uri url = Uri.parse(baseUrlComments);
 
@@ -40,12 +41,12 @@ class ApiServices {
 
       debugPrint('Response Status: ${response.statusCode}');
 
-      final body = jsonDecode(response.body);
+      final List body = jsonDecode(response.body);
       debugPrint(response.body);
 
       if (response.statusCode == 200) {
-        CommentsModel commentsData = CommentsModel.fromJson(body);
-        return commentsData;
+        List<CommentsModel> commentsInfo = body.map((e) => CommentsModel.fromJson(e)).toList();
+        return commentsInfo;
       } else {
         debugPrint('ERROR: ${response.statusCode}');
       }
@@ -54,7 +55,8 @@ class ApiServices {
     }
   }
 
-  static const baseUrlUniversityInfo = 'http://universities.hipolabs.com/search?country=United+States';
+  static const baseUrlUniversityInfo =
+      'http://universities.hipolabs.com/search?country=United+States';
 
   Future<List<UniversityInfoModel>?> getUniversityInfo() async {
     try {

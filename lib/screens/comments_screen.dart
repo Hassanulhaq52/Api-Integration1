@@ -16,13 +16,13 @@ class _CommentsScreenState extends State<CommentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<CommentsModel?>(
+      body: FutureBuilder<List<CommentsModel>?>(
           future: apiServices.getCommentsData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final commentsData = snapshot.data!;
               return ListView.builder(
-                itemCount: commentsData.name.length,
+                itemCount: commentsData.length,
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
@@ -37,18 +37,18 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                 color: Colors.blue,
                                 borderRadius: BorderRadius.circular(20)),
                             child: Text(
-                              'Name: ${commentsData.name}',
+                              'Name: ${commentsData[index].name}',
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          SizedBox(
-                            height: 20.0,
-                          ),
+                          // SizedBox(
+                          //   height: 10.0,
+                          // ),
                           Text(
-                            'Email: ${commentsData.email}',
+                            'Email: ${commentsData[index].email}',
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                             height: 20.0,
                           ),
                           Text(
-                            'Purpose: ${commentsData.body}',
+                            'ID: ${commentsData[index].id}',
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
