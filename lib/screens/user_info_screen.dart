@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:simple_api_integration/models/comments_model.dart';
+import 'package:simple_api_integration/models/user_info_model.dart';
 import 'package:simple_api_integration/services/api_services.dart';
-import 'package:simple_api_integration/constants/constants.dart';
 import 'package:simple_api_integration/widgets/api_text.dart';
 import 'package:simple_api_integration/widgets/text_container.dart';
 
-class CommentsScreen extends StatefulWidget {
-  const CommentsScreen({Key? key}) : super(key: key);
+class UserInfoScreen extends StatefulWidget {
+  const UserInfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<CommentsScreen> createState() => _CommentsScreenState();
+  State<UserInfoScreen> createState() => _UserInfoScreenState();
 }
 
-class _CommentsScreenState extends State<CommentsScreen> {
+class _UserInfoScreenState extends State<UserInfoScreen> {
   ApiServices apiServices = ApiServices();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade500,
-      body: FutureBuilder<List<CommentsModel>?>(
-          future: apiServices.getCommentsData(),
+      body: FutureBuilder<List<UserInfoModel>?>(
+          future: apiServices.getUserInfo(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final commentsData = snapshot.data!;
+              final userData = snapshot.data!;
+
               return Theme(
                 data: ThemeData(
                   highlightColor: Colors.grey.shade300,
@@ -32,8 +32,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
                   thickness: 10,
                   thumbVisibility: true,
                   child: ListView.builder(
-                    itemCount: commentsData.length,
+                    itemCount: userData.length,
                     itemBuilder: (context, index) {
+                      final addressData = userData[index].address;
+                      final companyData = userData[index].company;
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
@@ -41,27 +43,46 @@ class _CommentsScreenState extends State<CommentsScreen> {
                         ),
                         child: Card(
                           child: ListTile(
-                            contentPadding: const EdgeInsets.all(
-                              8,
-                            ),
+                            contentPadding: const EdgeInsets.all(8),
                             title: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextContainer(
-                                  apiData: 'Name: ${commentsData[index].name}',
-                                ),
-                                const SizedBox(
-                                  height: 5.0,
+                                  apiData: 'Name: ${userData[index].name}',
                                 ),
                                 ApiText(
-                                  apiText:
-                                      'Email: ${commentsData[index].email}',
+                                  apiText: 'Email: ${userData[index].email}',
                                 ),
                                 const SizedBox(
                                   height: 15.0,
                                 ),
                                 ApiText(
-                                  apiText: 'ID: ${commentsData[index].id}',
+                                  apiText: 'ID: ${userData[index].id}',
+                                ),
+                                TextContainer(
+                                  apiData: 'Address: ${addressData.city}',
+                                ),
+                                ApiText(
+                                  apiText: 'Suite: ${addressData.suite}',
+                                ),
+                                const SizedBox(
+                                  height: 15.0,
+                                ),
+                                ApiText(
+                                  apiText: 'Street: ${addressData.street}',
+                                ),
+                                TextContainer(
+                                  apiData: 'Company Name: ${companyData.name}',
+                                ),
+                                ApiText(
+                                  apiText:
+                                      'Catch Phrase: ${companyData.catchPhrase}',
+                                ),
+                                const SizedBox(
+                                  height: 15.0,
+                                ),
+                                ApiText(
+                                  apiText: 'BS: ${companyData.bs}',
                                 ),
                               ],
                             ),

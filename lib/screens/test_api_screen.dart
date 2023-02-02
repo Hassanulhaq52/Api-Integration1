@@ -69,7 +69,7 @@ class _TestApiScreenState extends State<TestApiScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
                       Text(
@@ -79,7 +79,7 @@ class _TestApiScreenState extends State<TestApiScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
                       Text(
@@ -89,33 +89,38 @@ class _TestApiScreenState extends State<TestApiScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
-                      Container(
-                        color: Colors.blue,
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, 'comments_screen');
-                            },
-                            child: Text(
-                              'Go to Comments screen',
-                              style: TextStyle(color: Colors.white),
-                            ),),
+                      NavigationButton(
+                        onpressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            'comments_screen',
+                          );
+                        }, title: 'Go to Comments Screen',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
-                      Container(
-                        color: Colors.blue,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'university_info_screen');
-                          },
-                          child: Text(
-                            'Go to University Info screen',
-                            style: TextStyle(color: Colors.white),
-                          ),),
+                      NavigationButton(
+                        onpressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            'university_info_screen',
+                          );
+                        }, title: 'Go to University Info Screen',
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      NavigationButton(
+                        onpressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            'user_info_screen',
+                          );
+                        }, title: 'Go to User Info Screen',
                       ),
                     ],
                   ),
@@ -126,6 +131,33 @@ class _TestApiScreenState extends State<TestApiScreen> {
               child: CircularProgressIndicator(),
             );
           }),
+    );
+  }
+}
+
+class NavigationButton extends StatelessWidget {
+  const NavigationButton({
+    super.key,
+    required this.onpressed,
+    required this.title,
+  });
+
+  final Function() onpressed;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      child: TextButton(
+        onPressed: onpressed,
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }

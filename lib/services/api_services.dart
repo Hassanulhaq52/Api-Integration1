@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:simple_api_integration/models/comments_model.dart';
 import 'package:simple_api_integration/models/test_api_model.dart';
-
+import 'package:simple_api_integration/models/user_info_model.dart';
 import '../models/university_info_model.dart';
 
 class ApiServices {
@@ -71,6 +71,33 @@ class ApiServices {
         List<UniversityInfoModel> universityInfo =
             body.map((e) => UniversityInfoModel.fromJson(e)).toList();
         return universityInfo;
+      } else {
+        debugPrint('ERROR: ${response.statusCode}');
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+  static const baseUrlUserInfo = 'https://jsonplaceholder.typicode.com/users';
+
+  Future<List<UserInfoModel>?> getUserInfo() async {
+    try {
+      Uri url = Uri.parse(baseUrlUserInfo);
+
+      http.Response response = await http.get(url);
+
+      debugPrint('Response Status: ${response.statusCode}');
+
+      final List body = jsonDecode(response.body);
+
+      debugPrint("$body");
+
+      if (response.statusCode == 200) {
+        List<UserInfoModel> userInfo =
+            body.map((e) => UserInfoModel.fromJson(e)).toList();
+
+        return userInfo;
       } else {
         debugPrint('ERROR: ${response.statusCode}');
       }
