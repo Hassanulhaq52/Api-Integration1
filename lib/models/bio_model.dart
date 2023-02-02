@@ -1,5 +1,5 @@
-class TestApiModel {
-  TestApiModel({
+class BioModel {
+  BioModel({
     required this.data,
     required this.support,
   });
@@ -7,7 +7,7 @@ class TestApiModel {
   final Data data;
   final Support support;
 
-  factory TestApiModel.fromJson(Map<String, dynamic> json) => TestApiModel(
+  factory BioModel.fromJson(Map<String, dynamic> json) => BioModel(
         data: Data.fromJson(json["data"]),
         support: Support.fromJson(json["support"]),
       );

@@ -2,14 +2,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:simple_api_integration/models/comments_model.dart';
-import 'package:simple_api_integration/models/test_api_model.dart';
+import 'package:simple_api_integration/models/bio_model.dart';
+import 'package:simple_api_integration/models/players_model.dart';
 import 'package:simple_api_integration/models/user_info_model.dart';
 import '../models/university_info_model.dart';
 
 class ApiServices {
   static const String baseUrlTestData = 'https://reqres.in/api/users/2';
 
-  Future<TestApiModel?> getTestData() async {
+  Future<BioModel?> getBioData() async {
     try {
       Uri url = Uri.parse(baseUrlTestData);
 
@@ -20,8 +21,8 @@ class ApiServices {
       debugPrint(response.body);
 
       if (response.statusCode == 200) {
-        TestApiModel testApiModel = TestApiModel.fromJson(body);
-        return testApiModel;
+        BioModel bioData = BioModel.fromJson(body);
+        return bioData;
       } else {
         debugPrint('ERROR : ${response.statusCode}');
       }
@@ -98,6 +99,34 @@ class ApiServices {
             body.map((e) => UserInfoModel.fromJson(e)).toList();
 
         return userInfo;
+      } else {
+        debugPrint('ERROR: ${response.statusCode}');
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+  static const baseUrlPlayers = 'https://free-nba.p.rapidapi.com/';
+  static const endPointPlayers = 'players';
+
+  Future<PlayersModel?> getPlayersData() async {
+    try {
+      Uri url = Uri.parse(baseUrlPlayers + endPointPlayers);
+      http.Response response = await http.get(url, headers: {
+        'X-RapidAPI-Key': 'f02c7294cbmshdba44773aba5dbap1f7c91jsn0ccc1099845d',
+        'X-RapidAPI-Host': 'free-nba.p.rapidapi.com'
+      });
+
+      debugPrint('Response Status: ${response.statusCode}');
+
+      final body = jsonDecode(response.body);
+
+      debugPrint(response.body);
+
+      if (response.statusCode == 200) {
+        PlayersModel playersData = PlayersModel.fromJson(body);
+        return playersData;
       } else {
         debugPrint('ERROR: ${response.statusCode}');
       }

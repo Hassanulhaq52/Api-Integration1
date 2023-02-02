@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:simple_api_integration/models/test_api_model.dart';
+import 'package:simple_api_integration/models/bio_model.dart';
 import 'package:simple_api_integration/services/api_services.dart';
 
-class TestApiScreen extends StatefulWidget {
-  const TestApiScreen({Key? key}) : super(key: key);
+class BioScreen extends StatefulWidget {
+  const BioScreen({Key? key}) : super(key: key);
 
   @override
-  State<TestApiScreen> createState() => _TestApiScreenState();
+  State<BioScreen> createState() => _BioScreenState();
 }
 
-class _TestApiScreenState extends State<TestApiScreen> {
+class _BioScreenState extends State<BioScreen> {
   ApiServices apiServices = ApiServices();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<TestApiModel?>(
-          future: apiServices.getTestData(),
+      body: FutureBuilder<BioModel?>(
+          future: apiServices.getBioData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final Data testApiData = snapshot.data!.data;
@@ -89,39 +89,6 @@ class _TestApiScreenState extends State<TestApiScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      NavigationButton(
-                        onpressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            'comments_screen',
-                          );
-                        }, title: 'Go to Comments Screen',
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      NavigationButton(
-                        onpressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            'university_info_screen',
-                          );
-                        }, title: 'Go to University Info Screen',
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      NavigationButton(
-                        onpressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            'user_info_screen',
-                          );
-                        }, title: 'Go to User Info Screen',
-                      ),
                     ],
                   ),
                 ),
@@ -135,29 +102,4 @@ class _TestApiScreenState extends State<TestApiScreen> {
   }
 }
 
-class NavigationButton extends StatelessWidget {
-  const NavigationButton({
-    super.key,
-    required this.onpressed,
-    required this.title,
-  });
 
-  final Function() onpressed;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: TextButton(
-        onPressed: onpressed,
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-}

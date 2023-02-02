@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_api_integration/models/comments_model.dart';
 import 'package:simple_api_integration/services/api_services.dart';
-import 'package:simple_api_integration/constants/constants.dart';
 import 'package:simple_api_integration/widgets/api_text.dart';
 import 'package:simple_api_integration/widgets/text_container.dart';
 
@@ -76,7 +75,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }),
+          },),
     );
   }
 }
