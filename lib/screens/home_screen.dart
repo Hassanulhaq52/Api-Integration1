@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:simple_api_integration/screens/bio_screen.dart';
+import 'package:simple_api_integration/screens/comments_screen.dart';
+import 'package:simple_api_integration/screens/covid_cases_screen.dart';
+import 'package:simple_api_integration/screens/date_picker.dart';
+import 'package:simple_api_integration/screens/players_screen.dart';
+import 'package:simple_api_integration/screens/university_info_screen.dart';
+import 'package:simple_api_integration/screens/user_info_screen.dart';
 import 'package:simple_api_integration/services/api_services.dart';
 import 'package:simple_api_integration/widgets/navigation_button.dart';
 
@@ -27,9 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             NavigationButton(
               onpressed: () {
-                Navigator.pushNamed(
+                Navigator.push(
                   context,
-                  'bio_screen',
+                  MaterialPageRoute(
+                    builder: (context) => const BioScreen(),
+                  ),
                 );
               },
               title: 'Go to Bio Screen',
@@ -39,9 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             NavigationButton(
               onpressed: () {
-                Navigator.pushNamed(
+                Navigator.push(
                   context,
-                  'comments_screen',
+                  MaterialPageRoute(
+                    builder: (context) => const CommentsScreen(),
+                  ),
                 );
               },
               title: 'Go to Comments Screen',
@@ -51,9 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             NavigationButton(
               onpressed: () {
-                Navigator.pushNamed(
+                Navigator.push(
                   context,
-                  'university_info_screen',
+                  MaterialPageRoute(
+                    builder: (context) => const UniversityInfoScreen(),
+                  ),
                 );
               },
               title: 'Go to University Info Screen',
@@ -63,9 +76,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             NavigationButton(
               onpressed: () {
-                Navigator.pushNamed(
+                Navigator.push(
                   context,
-                  'user_info_screen',
+                  MaterialPageRoute(
+                    builder: (context) => const UserInfoScreen(),
+                  ),
                 );
               },
               title: 'Go to User Info Screen',
@@ -75,12 +90,42 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             NavigationButton(
               onpressed: () {
-                Navigator.pushNamed(
+                Navigator.push(
                   context,
-                  'players_screen',
+                  MaterialPageRoute(
+                    builder: (context) => const PlayersScreen(),
+                  ),
                 );
               },
-              title: 'Players Screen',
+              title: 'Go to Players Screen',
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            // NavigationButton(
+            //   onpressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => CovidCasesScreen(),
+            //       ),
+            //     );
+            //   },
+            //   title: 'Go to Covid Cases Screen',
+            // ),
+            // const SizedBox(
+            //   height: 20.0,
+            // ),
+            NavigationButton(
+              onpressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DatePicker(),
+                  ),
+                );
+              },
+              title: 'Go to Date Picker',
             ),
           ],
         ),

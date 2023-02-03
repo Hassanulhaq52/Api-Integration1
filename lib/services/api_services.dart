@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:simple_api_integration/models/comments_model.dart';
 import 'package:simple_api_integration/models/bio_model.dart';
+import 'package:simple_api_integration/models/covid_cases_model.dart';
 import 'package:simple_api_integration/models/players_model.dart';
 import 'package:simple_api_integration/models/user_info_model.dart';
 import '../models/university_info_model.dart';
@@ -127,6 +128,36 @@ class ApiServices {
       if (response.statusCode == 200) {
         PlayersModel playersData = PlayersModel.fromJson(body);
         return playersData;
+      } else {
+        debugPrint('ERROR: ${response.statusCode}');
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+
+  static const baseUrlDate = 'https://covid-19-statistics.p.rapidapi.com/';
+
+  Future<CovidCasesModel?> getCovidCases(String date) async {
+    final endPointDate = 'reports/total?date=$date';
+    try {
+      Uri url = Uri.parse(baseUrlDate + endPointDate);
+
+      http.Response response = await http.get(url, headers: {
+        'X-RapidAPI-Key': 'f02c7294cbmshdba44773aba5dbap1f7c91jsn0ccc1099845d',
+        'X-RapidAPI-Host': 'covid-19-statistics.p.rapidapi.com'
+      });
+
+      debugPrint('Response Status: ${response.statusCode}');
+
+      final body = jsonDecode(response.body);
+
+      debugPrint(response.body);
+
+      if (response.statusCode == 200) {
+        CovidCasesModel covidCasesData = CovidCasesModel.fromJson(body);
+        return covidCasesData;
       } else {
         debugPrint('ERROR: ${response.statusCode}');
       }

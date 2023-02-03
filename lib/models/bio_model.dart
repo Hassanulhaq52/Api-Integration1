@@ -46,6 +46,8 @@ class Support {
   final String url;
   final String text;
 
-  factory Support.fromJson(Map<String, dynamic> json) =>
-      Support(url: json["url"], text: json["text"]);
+  factory Support.fromJson(Map<String, dynamic> json) => Support(
+        url: json["url"],
+        text: json["text"],
+      );
 }
