@@ -5,6 +5,7 @@ import 'package:simple_api_integration/models/comments_model.dart';
 import 'package:simple_api_integration/models/bio_model.dart';
 import 'package:simple_api_integration/models/covid_cases_model.dart';
 import 'package:simple_api_integration/models/players_model.dart';
+import 'package:simple_api_integration/models/result_info_model.dart';
 import 'package:simple_api_integration/models/user_info_model.dart';
 import '../models/university_info_model.dart';
 
@@ -165,4 +166,33 @@ class ApiServices {
       debugPrint(error.toString());
     }
   }
+
+  static const baseUrlResultsInfo = 'https://randomuser.me/';
+
+  Future<ResultsInfoModel?> getResultsInfo() async {
+
+    const String endPointResultsInfo = 'api/';
+    try {
+      Uri url = Uri.parse(baseUrlResultsInfo + endPointResultsInfo);
+
+      http.Response response = await http.get(url);
+
+      debugPrint('Response Status: ${response.statusCode}');
+
+      final body = jsonDecode(response.body);
+
+      debugPrint(response.body);
+
+      if (response.statusCode == 200) {
+        ResultsInfoModel resultsInfo = ResultsInfoModel.fromJson(body);
+        return resultsInfo;
+      } else {
+        debugPrint('ERROR: ${response.statusCode}');
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
 }
+

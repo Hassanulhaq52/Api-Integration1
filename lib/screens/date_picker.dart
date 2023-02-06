@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simple_api_integration/screens/covid_cases_screen.dart';
+import 'package:simple_api_integration/screens/home_screen.dart';
 import 'package:simple_api_integration/widgets/navigation_button.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DatePicker extends StatefulWidget {
   const DatePicker({Key? key}) : super(key: key);
@@ -18,46 +18,57 @@ class _DatePickerState extends State<DatePicker> {
     setState(() {
       today = day;
       date = today.toString().split(' ')[0];
-      print(date);
+      debugPrint(date);
     });
   }
- String? date;
+
+  String? date;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Selected Day: ${today.toString().split(' ')[0]}',
+    return WillPopScope(
+      onWillPop: () async {
+        return await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
           ),
-          TableCalendar(
-            headerStyle: const HeaderStyle(
-              formatButtonVisible: false,
-              titleCentered: true,
+        );
+      },
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Selected Day: ${today.toString().split(' ')[0]}',
             ),
-            selectedDayPredicate: (day) => isSameDay(day, today),
-            availableGestures: AvailableGestures.all,
-            firstDay: DateTime.utc(2010, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            focusedDay: today,
-            onDaySelected: _onSelectedDay,
-          ),
-          NavigationButton(
-            onpressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => CovidCasesScreen(
-                    date: date!,
+            TableCalendar(
+              headerStyle: const HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+              ),
+              selectedDayPredicate: (day) => isSameDay(day, today),
+              availableGestures: AvailableGestures.all,
+              firstDay: DateTime.utc(2010, 10, 16),
+              lastDay: DateTime.utc(2030, 3, 14),
+              focusedDay: today,
+              onDaySelected: _onSelectedDay,
+            ),
+            NavigationButton(
+              onpressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CovidCasesScreen(
+                      date: date!,
+                    ),
                   ),
-                ),
-              );
-            },
-            title: 'Continue',
-          ),
-        ],
+                );
+              },
+              title: 'Continue',
+            ),
+          ],
+        ),
       ),
     );
   }

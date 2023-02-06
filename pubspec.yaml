@@ -16,8 +16,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   table_calendar: ^3.0.9
-  syncfusion_flutter_datepicker: ^20.4.48
-  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:

@@ -32,7 +32,7 @@ class CovidCasesScreen extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final covidCasesInfo = snapshot.data!;
-              final covidData = covidCasesInfo.data!;
+              final covidData = covidCasesInfo.data;
 
               return ListView.builder(itemBuilder: (context, index) {
                 return Card(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:simple_api_integration/screens/bio_screen.dart';
 import 'package:simple_api_integration/screens/comments_screen.dart';
-import 'package:simple_api_integration/screens/covid_cases_screen.dart';
 import 'package:simple_api_integration/screens/date_picker.dart';
 import 'package:simple_api_integration/screens/players_screen.dart';
+import 'package:simple_api_integration/screens/results_info_screen.dart';
 import 'package:simple_api_integration/screens/university_info_screen.dart';
 import 'package:simple_api_integration/screens/user_info_screen.dart';
 import 'package:simple_api_integration/services/api_services.dart';
@@ -22,11 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade500,
+      backgroundColor: Colors.grey.shade300,
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 10,
+          horizontal: 30,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -102,20 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 20.0,
             ),
-            // NavigationButton(
-            //   onpressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => CovidCasesScreen(),
-            //       ),
-            //     );
-            //   },
-            //   title: 'Go to Covid Cases Screen',
-            // ),
-            // const SizedBox(
-            //   height: 20.0,
-            // ),
             NavigationButton(
               onpressed: () {
                 Navigator.push(
@@ -126,6 +111,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
               title: 'Go to Date Picker',
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            NavigationButton(
+              onpressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ResultsInfoScreen(),
+                  ),
+                );
+              },
+              title: 'Go to Results Info Screen',
             ),
           ],
         ),
