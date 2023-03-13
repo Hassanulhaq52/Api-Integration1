@@ -3,6 +3,7 @@ import 'package:simple_api_integration/screens/bio_screen.dart';
 import 'package:simple_api_integration/screens/comments_screen.dart';
 import 'package:simple_api_integration/screens/date_picker.dart';
 import 'package:simple_api_integration/screens/players_screen.dart';
+import 'package:simple_api_integration/screens/products_screen.dart';
 import 'package:simple_api_integration/screens/results_info_screen.dart';
 import 'package:simple_api_integration/screens/university_info_screen.dart';
 import 'package:simple_api_integration/screens/user_info_screen.dart';
@@ -125,6 +126,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
               title: 'Go to Results Info Screen',
+            ),const SizedBox(
+              height: 20.0,
+            ),
+            NavigationButton(
+              onpressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProductsScreen(),
+                  ),
+                );
+              },
+              title: 'Go to Products Screen',
             ),
           ],
         ),

@@ -19,7 +19,7 @@ class UniversityInfoModel {
 
       UniversityInfoModel(
         country: json["country"],
-        domains:List.from( json["domains"]),
+        domains: List.from(json["domains"]),
         alphaTwoCodes: json["alpha_two_code"],
         stateProvince: json["state-province"],
         name: json["name"],

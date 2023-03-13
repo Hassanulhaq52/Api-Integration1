@@ -18,7 +18,7 @@ class TextContainer extends StatelessWidget {
           color: Colors.blue, borderRadius: BorderRadius.circular(20)),
       child: Text(
         apiData,
-        style: Constants.apiDataStyle,
+        style: Constants.textContainerStyle,
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:simple_api_integration/models/covid_cases_model.dart';
 import 'package:simple_api_integration/models/players_model.dart';
 import 'package:simple_api_integration/models/result_info_model.dart';
 import 'package:simple_api_integration/models/user_info_model.dart';
+import '../models/products_model.dart';
 import '../models/university_info_model.dart';
 
 class ApiServices {
@@ -137,7 +138,6 @@ class ApiServices {
     }
   }
 
-
   static const baseUrlDate = 'https://covid-19-statistics.p.rapidapi.com/';
 
   Future<CovidCasesModel?> getCovidCases(String date) async {
@@ -170,7 +170,6 @@ class ApiServices {
   static const baseUrlResultsInfo = 'https://randomuser.me/';
 
   Future<ResultsInfoModel?> getResultsInfo() async {
-
     const String endPointResultsInfo = 'api/';
     try {
       Uri url = Uri.parse(baseUrlResultsInfo + endPointResultsInfo);
@@ -194,5 +193,30 @@ class ApiServices {
     }
   }
 
-}
+  static const baseUrlProducts = 'https://dummyjson.com/';
 
+  Future<ProductsModel?> getProducts() async {
+    try {
+      const endPointProducts = 'products';
+
+      Uri url = Uri.parse(baseUrlProducts + endPointProducts);
+
+      http.Response response = await http.get(url);
+
+      debugPrint('Response Status: ${response.statusCode}');
+
+      final body = jsonDecode(response.body);
+
+      debugPrint(response.body);
+
+      if (response.statusCode == 200) {
+        ProductsModel productsData = ProductsModel.fromJson(body);
+        return productsData;
+      } else {
+        debugPrint('ERROR ${response.statusCode}');
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+}
